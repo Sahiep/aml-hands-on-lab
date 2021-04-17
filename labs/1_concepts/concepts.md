@@ -1,4 +1,4 @@
-# Introducting Key Concepts of AzureML 
+# Introducing Key Concepts of AzureML 
 
 ### Objectives
 
