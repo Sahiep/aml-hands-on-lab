@@ -3,11 +3,6 @@
 ## Prerequisites
 This module provides a walkthrough for setting up a new AML workspace. To run through the next sections, you will need an Azure subscription. See also instructions on how to create a workspace [here](https://docs.microsoft.com/en-us/azure/machine-learning/how-to-manage-workspace).
 
-## Review --- Creating an AzureML workspace
-1. [Setup AzureML workspace using UI](./UI/README.md)
-2. [Setup AzureML workspace using CLI](./CLI/README.md)
-3. [Setup AzureML workspace using Python SDK](./SDK/Python/README.md)
-
 ### Objectives
 
 In this hands-on lab, you will learn how to:
@@ -16,7 +11,7 @@ In this hands-on lab, you will learn how to:
 - Setup AzureML workspace using SDK
 - Setup AzureML workspace using CLI
 
-## Done --- Create an AzureML workspace via Azure Portal UI
+## Create an AzureML workspace via Azure Portal UI
 
 1. In you Azure portal navigate to 'Create a resource' and click
 
@@ -48,29 +43,27 @@ In this hands-on lab, you will learn how to:
 
 Learn more about how to [create and manage Azure Machine Learning workspaces in the Azure portal](https://docs.microsoft.com/en-us/azure/machine-learning/how-to-manage-workspace).
 
-
-## Review --- Setup AML workspace using CLI 
+## Setup AML workspace using CLI 
 
 Here we use a bash script for setting up an Azure ML workspace.
 
-- You can execute the below commands in any bash cosole. For simplicity you can use the embeded Azure Cloud Shell from your Azure portal
+You can execute the below commands in any bash console. For simplicity you can use the embedded Azure Cloud Shell from your Azure portal
 
   ![Azure Cloud Shell](./media/AzureCloudShell.png)
 
-- Execute the following commands:
+Execute the following commands:
   
-  Note: You can change PREFIX and LOCATION in create-env.sh (optional). Current script creates resources with prefix **amlwstemp** in **westeurope** region.
+  **Note:** You can change PREFIX and LOCATION in create-env.sh (optional). Current script creates resources with prefix **amlwstemp** in **westeurope** region.
   
   **Note:** If multiple users under same subscription and resource group are creating multiple workspaces during the workshop, edit 'create-env.sh' and add the *$RANDOM* element to the *PREFIX*. This will create resources with unique names for each user and avoids conflict name error.
   
-
    - Clone Git repository
      ```sh
-     $ git clone https://dev.azure.com/mozamani/aml_workshop_template/_git/aml_workshop_template
+     $ git clone https://github.com/Sahiep/aml-hands-on-lab
      ``` 
    - Access *0-Setup/CLI/* folder
      ```sh
-     $ cd aml_workshop_template/0-Setup/CLI/
+     $ cd aml-hands-on-lab/0_setup/resources/
      ``` 
    - Execute the bash script
      ```sh
@@ -85,11 +78,12 @@ As a result, following ressources will be deployed in your defined resource grou
 * Azure Application Insights
 * Azure Container Registry
 
+
   ![Azure Ressources](./media/DeployedRessources.png)
 
 Learn more about how to [create a workspace for Azure Machine Learning with Azure CLI](https://docs.microsoft.com/en-us/azure/machine-learning/how-to-manage-workspace-cli).
 
-## Review --- Setup AzureML workspace using Python SDK 
+## Setup AzureML workspace using Python SDK 
 
 Python script for AzureML Workspace setup
 
@@ -107,11 +101,11 @@ Note: You can change resource names and location in .env file.
 
  - Clone Git repository
    ```sh
-   $ git clone https://dev.azure.com/mozamani/aml_workshop_template/_git/aml_workshop_template
+   $ git clone https://github.com/Sahiep/aml-hands-on-lab
    ``` 
  - Access SDK folder
    ```sh
-   $ cd 0-Setup/SDK/
+   $ cd aml-hands-on-lab/0_setup/resources/
    ``` 
  - Execute the Python script
    ```sh
