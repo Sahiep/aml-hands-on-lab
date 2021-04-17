@@ -8,7 +8,7 @@ layout: home
 
 1. [Azure ML Setup](./labs/0_setup/setup.md) 
 1. [Azure ML Concepts](./labs/1_concepts/concepts.md)
-1. [Azure ML Model Training](./labs/03_terraform/terraform.md)
+1. [Azure ML Model Training](./labs/2_training/training.md)
 1. [Azure ML Deployment](./labs/04_containers_on_azure/containers_on_azure.md)
 
 ## Acknowledgements
