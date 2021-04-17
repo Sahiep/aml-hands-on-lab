@@ -1,3 +1,10 @@
+# Introducting Key Concepts of AzureML 
+
+### Objectives
+
+[tbd]
+
+
 ## Setting up the Compute Targets
 
 ### Prerequisites
