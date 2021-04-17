@@ -119,4 +119,4 @@ As a result, following ressources will be deployed in your defined resource grou
 * Azure Storage Account
 * Azure Application Insights
 
-  ![Azure Ressources](../../CLI/media/DeployedRessources.png)
+  ![Azure Ressources](./media/DeployedRessources.png)
