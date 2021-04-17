@@ -16,7 +16,7 @@ In this hands-on lab, you will learn how to:
 - Setup AzureML workspace using SDK
 - Setup AzureML workspace using CLI
 
-## Create an AzureML workspace via Azure Portal UI
+## Done --- Create an AzureML workspace via Azure Portal UI
 
 1. In you Azure portal navigate to 'Create a resource' and click
 
@@ -49,7 +49,7 @@ In this hands-on lab, you will learn how to:
 Learn more about how to [create and manage Azure Machine Learning workspaces in the Azure portal](https://docs.microsoft.com/en-us/azure/machine-learning/how-to-manage-workspace).
 
 
-## Setup AML workspace using CLI 
+## Review --- Setup AML workspace using CLI 
 
 Here we use a bash script for setting up an Azure ML workspace.
 
@@ -89,7 +89,7 @@ As a result, following ressources will be deployed in your defined resource grou
 
 Learn more about how to [create a workspace for Azure Machine Learning with Azure CLI](https://docs.microsoft.com/en-us/azure/machine-learning/how-to-manage-workspace-cli).
 
-## Setup AzureML workspace using Python SDK 
+## Review --- Setup AzureML workspace using Python SDK 
 
 Python script for AzureML Workspace setup
 
