@@ -2,8 +2,11 @@
 
 ### Objectives
 
-[tbd]
-
+In the following exercise you will learn about the kex concepts of the AzureML Service: 
+- Compute Targtes
+    - Compute Cluster
+    - Compute Instances
+- Datastores and Datasets
 
 ## Setting up the Compute Targets
 
@@ -62,10 +65,8 @@ For the following parts of the workshop, you are going to work on the notebook e
 
 3. In the terminal window clone this repository by typing:
    ```
-   $ git clone https://dev.azure.com/mozamani/_git/aml_workshop_template
+   $ git clone https://github.com/Sahiep/aml-hands-on-lab.git
    ```
-
-[[_TOC_]]
 
 ## AzureML Datasets
 
