@@ -43,7 +43,7 @@ See [here](https://docs.microsoft.com/en-us/azure/machine-learning/service/how-t
 
    ![createnbvm](https://github.com/ruoccofabrizio/azureml-compute-instances-shutdown/raw/master/architecture.PNG)
 
-## Review --- Set up our development environment
+## Set up our development environment
 
 ### Prerequisites
 
@@ -68,7 +68,7 @@ For the following parts of the workshop, you are going to work on the notebook e
    $ git clone https://github.com/Sahiep/aml-hands-on-lab.git
    ```
 
-## AzureML Datasets
+## Review --- AzureML Datasets
 
 ### Prerequisites
 
@@ -148,5 +148,5 @@ Datasets enable:
 
 For more information on datasets, see the how-to for more information on creating and using Datasets: https://docs.microsoft.com/en-us/azure/machine-learning/service/how-to-create-register-datasets
 
-
+## Review --- Option C - Create a Dataset in the SDK
 
