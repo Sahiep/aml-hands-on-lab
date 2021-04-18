@@ -1,0 +1,592 @@
+{
+  "cells": [
+    {
+      "cell_type": "markdown",
+      "source": [
+        "# Scikit-Learn binary classification model training on local notebook. \n",
+        "The code is plain vanilla Scikit-Learn training/creation of a binary classification model.Azure ML is only used to gather original data from an AML Dataset. This notebook can run on a local PC or on any Azure ML Compute Instance or Azure ML Compute Instance.\n",
+        "\n",
+        "*This code is the baseline for the next labs/notebooks in the Workshop moving to AML remote compute, etc*"
+      ],
+      "metadata": {}
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "### Import libraries to use in notebook"
+      ],
+      "metadata": {}
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "from sklearn.pipeline import Pipeline\n",
+        "from sklearn.impute import SimpleImputer\n",
+        "from sklearn.preprocessing import StandardScaler, OneHotEncoder\n",
+        "from sklearn.svm import SVC\n",
+        "import pandas as pd\n",
+        "import numpy as np\n",
+        "from azureml.core import Workspace, Dataset, Environment, Experiment\n",
+        "import joblib\n",
+        "\n",
+        "print(\"Azure SDK version:\", azureml.core.VERSION)"
+      ],
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "Azure SDK version: 1.19.0\n"
+          ]
+        }
+      ],
+      "execution_count": 54,
+      "metadata": {}
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "### Create Workspace to load Tabular Datasets and to log local training into AML"
+      ],
+      "metadata": {}
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "# Connect to an existing Azure ML Workshop in order to use Azure ML Datasets and Runs Logging into AML\n",
+        "# if you run this locally download config.json and place it in root folder of the repo\n",
+        "# ws = Workspace.from_config('../../../config.json') \n",
+        "\n",
+        "ws = Workspace.from_config()\n",
+        "print(ws.name, ws.resource_group, ws.location, sep='\\n')"
+      ],
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "amlworkspacesahiep2141\n",
+            "MCW_Synapse\n",
+            "westeurope\n"
+          ]
+        }
+      ],
+      "execution_count": 55,
+      "metadata": {}
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "### Load the German credit data\n",
+        "\n",
+        "Note: as you are now accessing the workspace, the Notebook needs to be authenticated for access through device authentication. Hence, you will be prompted with a device login like so: \n",
+        "\n",
+        "    Performing interactive authentication. Please follow the instructions on the terminal.\n",
+        "    To sign in, use a web browser to open the page https://microsoft.com/devicelogin and enter the code XXXXX to authenticate.\n",
+        "    \n",
+        "Please follow these instructions in a new browser tab."
+      ],
+      "metadata": {}
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "In Azure ML, *datastores* are references to storage locations, such as Azure Storage blob containers. Every workspace has a default datastore - usually the Azure storage blob container that was created with the workspace. If you need to work with data that is stored in different locations, you can add custom datastores to your workspace and set any of them to be the default.\n",
+        "\n",
+        "Run the following code to determine the datastores in your workspace:"
+      ],
+      "metadata": {}
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "from azureml.core import Datastore\n",
+        "\n",
+        "# Get the default datastore\n",
+        "default_ds = ws.get_default_datastore()\n",
+        "\n",
+        "# Enumerate all datastores, indicating which is the default\n",
+        "for ds_name in ws.datastores:\n",
+        "    print(ds_name, \"- Default =\", ds_name == default_ds.name)\n",
+        "\n",
+        "datastore.upload(src_dir='../../../../../Data/datasets',\n",
+        "                 target_path='datasets',\n",
+        "                 overwrite=True)"
+      ],
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "azureml_globaldatasets - Default = False\n",
+            "sqlpool01 - Default = False\n",
+            "workspacefilestore - Default = False\n",
+            "workspaceblobstore - Default = True\n",
+            "Uploading an estimated of 3 files\n",
+            "Uploading ../../../../../Data/datasets/Automobile price data.csv\n",
+            "Uploaded ../../../../../Data/datasets/Automobile price data.csv, 1 files out of an estimated total of 3\n",
+            "Uploading ../../../../../Data/datasets/german_credit_data.csv\n",
+            "Uploaded ../../../../../Data/datasets/german_credit_data.csv, 2 files out of an estimated total of 3\n",
+            "Uploading ../../../../../Data/datasets/IBM-Employee-Attrition.csv\n",
+            "Uploaded ../../../../../Data/datasets/IBM-Employee-Attrition.csv, 3 files out of an estimated total of 3\n",
+            "Uploaded 3 files\n"
+          ]
+        },
+        {
+          "output_type": "execute_result",
+          "execution_count": 56,
+          "data": {
+            "text/plain": "$AZUREML_DATAREFERENCE_5436fa9deab04891a53a321d7488468d"
+          },
+          "metadata": {}
+        }
+      ],
+      "execution_count": 56,
+      "metadata": {}
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "### Create and Register a Dataset\n",
+        "A dataset is an object that encapsulates a specific data source. Let's create a dataset from the german credit data you uploaded to the datastore, and view the first 3 records. In this case, the data is in a structured format in a CSV file, so we'll use a Tabular dataset."
+      ],
+      "metadata": {}
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "from azureml.core import Dataset\n",
+        "\n",
+        "# Create a tabular dataset from the path on the datastore (this may take a short while)\n",
+        "dataset = Dataset.Tabular.from_delimited_files(path = [(datastore, './datasets/german_credit_data.csv')])\n",
+        "\n",
+        "# preview the first 3 rows of the dataset\n",
+        "dataset.take(3).to_pandas_dataframe()\n",
+        "\n",
+        "creditData = dataset.register(workspace = ws,\n",
+        "                                name = 'german-credit',\n",
+        "                                description = 'german credit data',\n",
+        "                                create_new_version = True)"
+      ],
+      "outputs": [],
+      "execution_count": 57,
+      "metadata": {}
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "# get the German credit dataset from the workspace\n",
+        "creditData = ws.datasets['german-credit'].to_pandas_dataframe()\n",
+        "creditData.head()"
+      ],
+      "outputs": [
+        {
+          "output_type": "execute_result",
+          "execution_count": 58,
+          "data": {
+            "text/html": "<div>\n<style scoped>\n    .dataframe tbody tr th:only-of-type {\n        vertical-align: middle;\n    }\n\n    .dataframe tbody tr th {\n        vertical-align: top;\n    }\n\n    .dataframe thead th {\n        text-align: right;\n    }\n</style>\n<table border=\"1\" class=\"dataframe\">\n  <thead>\n    <tr style=\"text-align: right;\">\n      <th></th>\n      <th>Sno</th>\n      <th>Age</th>\n      <th>Sex</th>\n      <th>Job</th>\n      <th>Housing</th>\n      <th>Saving accounts</th>\n      <th>Checking account</th>\n      <th>Credit amount</th>\n      <th>Duration</th>\n      <th>Purpose</th>\n      <th>Risk</th>\n    </tr>\n  </thead>\n  <tbody>\n    <tr>\n      <th>0</th>\n      <td>0</td>\n      <td>67</td>\n      <td>male</td>\n      <td>2</td>\n      <td>own</td>\n      <td>NA</td>\n      <td>little</td>\n      <td>1169</td>\n      <td>6</td>\n      <td>radio/TV</td>\n      <td>good</td>\n    </tr>\n    <tr>\n      <th>1</th>\n      <td>1</td>\n      <td>22</td>\n      <td>female</td>\n      <td>2</td>\n      <td>own</td>\n      <td>little</td>\n      <td>moderate</td>\n      <td>5951</td>\n      <td>48</td>\n      <td>radio/TV</td>\n      <td>bad</td>\n    </tr>\n    <tr>\n      <th>2</th>\n      <td>2</td>\n      <td>49</td>\n      <td>male</td>\n      <td>1</td>\n      <td>own</td>\n      <td>little</td>\n      <td>NA</td>\n      <td>2096</td>\n      <td>12</td>\n      <td>education</td>\n      <td>good</td>\n    </tr>\n    <tr>\n      <th>3</th>\n      <td>3</td>\n      <td>45</td>\n      <td>male</td>\n      <td>2</td>\n      <td>free</td>\n      <td>little</td>\n      <td>little</td>\n      <td>7882</td>\n      <td>42</td>\n      <td>furniture/equipment</td>\n      <td>good</td>\n    </tr>\n    <tr>\n      <th>4</th>\n      <td>4</td>\n      <td>53</td>\n      <td>male</td>\n      <td>2</td>\n      <td>free</td>\n      <td>little</td>\n      <td>little</td>\n      <td>4870</td>\n      <td>24</td>\n      <td>car</td>\n      <td>bad</td>\n    </tr>\n  </tbody>\n</table>\n</div>",
+            "text/plain": "   Sno  Age     Sex  Job Housing Saving accounts Checking account  \\\n0    0   67    male    2     own              NA           little   \n1    1   22  female    2     own          little         moderate   \n2    2   49    male    1     own          little               NA   \n3    3   45    male    2    free          little           little   \n4    4   53    male    2    free          little           little   \n\n   Credit amount  Duration              Purpose  Risk  \n0           1169         6             radio/TV  good  \n1           5951        48             radio/TV   bad  \n2           2096        12            education  good  \n3           7882        42  furniture/equipment  good  \n4           4870        24                  car   bad  "
+          },
+          "metadata": {}
+        }
+      ],
+      "execution_count": 58,
+      "metadata": {}
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "## Clean up the initial dataset"
+      ],
+      "metadata": {}
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "# Dropping Sno column since it is merely an identifier\n",
+        "target = creditData[\"Risk\"]\n",
+        "creditData = creditData.drop(['Sno'], axis=1)\n",
+        "creditXData = creditData.drop(['Risk'], axis=1)"
+      ],
+      "outputs": [],
+      "execution_count": 59,
+      "metadata": {}
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "## Split in Train and Test datasets (DataFrames)"
+      ],
+      "metadata": {}
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "# Split data into train and test\n",
+        "from sklearn.model_selection import train_test_split\n",
+        "x_train, x_test, y_train, y_test = train_test_split(creditXData, \n",
+        "                                                    target, \n",
+        "                                                    test_size = 0.2,\n",
+        "                                                    random_state=0,\n",
+        "                                                    stratify=target)"
+      ],
+      "outputs": [],
+      "execution_count": 60,
+      "metadata": {}
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "## Transform data"
+      ],
+      "metadata": {}
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "# Collect the categorical and numerical column names in separate lists\n",
+        "categorical = []\n",
+        "for col, value in creditXData.iteritems():\n",
+        "    if value.dtype == 'object':\n",
+        "        categorical.append(col)\n",
+        "        \n",
+        "numerical = creditXData.columns.difference(categorical)\n",
+        "\n",
+        "print(numerical)\n",
+        "print(categorical)"
+      ],
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "Index(['Age', 'Credit amount', 'Duration', 'Job'], dtype='object')\n",
+            "['Sex', 'Housing', 'Saving accounts', 'Checking account', 'Purpose']\n"
+          ]
+        }
+      ],
+      "execution_count": 61,
+      "metadata": {}
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "## Create data processing pipelines (Scikit-Learn pipelines)\n",
+        "NOTE: This code uses Scikit-Learn pipelines. Not related to AML Pipelines. Different concept. "
+      ],
+      "metadata": {}
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "from sklearn.compose import ColumnTransformer\n",
+        "\n",
+        "# We create the transformations pipelines for both numeric and categorical data.\n",
+        "numeric_transformer = Pipeline(steps=[\n",
+        "    ('imputer', SimpleImputer(strategy='median')),\n",
+        "    ('scaler', StandardScaler())])\n",
+        "\n",
+        "categorical_transformer = Pipeline(steps=[\n",
+        "    ('imputer', SimpleImputer(strategy='constant', fill_value='missing')),\n",
+        "    ('onehot', OneHotEncoder(handle_unknown='ignore'))])\n",
+        "\n",
+        "transforms_pipeline = ColumnTransformer(\n",
+        "    transformers=[\n",
+        "        ('num', numeric_transformer, numerical),\n",
+        "        ('cat', categorical_transformer, categorical)])"
+      ],
+      "outputs": [],
+      "execution_count": 62,
+      "metadata": {}
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "## Add classifier algorithm (SVC: Support Vector Classifier) to the pipeline"
+      ],
+      "metadata": {}
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "# Append classifier to Scikit-Learn transformations pipeline.\n",
+        "# Now we have a full Scikit-Learn prediction pipeline.\n",
+        "model_pipeline = Pipeline(steps=[('preprocessor', transforms_pipeline),\n",
+        "                      ('classifier', SVC(kernel='linear', C = 1.0, probability=True))]) "
+      ],
+      "outputs": [],
+      "execution_count": 63,
+      "metadata": {}
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "## Create AML Experiment, run and log just for logging info while training locally in Notebook"
+      ],
+      "metadata": {}
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "from azureml.core import Experiment\n",
+        "\n",
+        "# Get an experiment object from AML\n",
+        "experiment = Experiment(workspace=ws, name=\"local-train-german-credit\")\n",
+        "\n",
+        "# Create a run object in the experiment\n",
+        "run =  experiment.start_logging()\n",
+        "# Log the algorithm parameter C to the run\n",
+        "run.log('C', 1.0)"
+      ],
+      "outputs": [],
+      "execution_count": 64,
+      "metadata": {}
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "## Train the SVM (Support Vector Machine) Classifier Model"
+      ],
+      "metadata": {}
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "model = model_pipeline.fit(x_train, y_train)"
+      ],
+      "outputs": [],
+      "execution_count": 65,
+      "metadata": {}
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "## Make Predictions and calculate Accuracy metric"
+      ],
+      "metadata": {}
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "from sklearn.metrics import accuracy_score\n",
+        "\n",
+        "# Make Multiple Predictions\n",
+        "y_predictions = model.predict(x_test)\n",
+        "\n",
+        "accuracy = accuracy_score(y_test, y_predictions)\n",
+        "print('Accuracy: ', accuracy)"
+      ],
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "Accuracy:  0.725\n"
+          ]
+        }
+      ],
+      "execution_count": 66,
+      "metadata": {}
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "## Confusion Matrix"
+      ],
+      "metadata": {}
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "from sklearn.metrics import confusion_matrix\n",
+        "import matplotlib.pyplot as plt\n",
+        "\n",
+        "cm = confusion_matrix(y_test, y_predictions)\n",
+        "print(cm)"
+      ],
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "[[ 13  47]\n",
+            " [  8 132]]\n"
+          ]
+        }
+      ],
+      "execution_count": 67,
+      "metadata": {}
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "# Show confusion matrix in a separate window\n",
+        "plt.matshow(cm)\n",
+        "plt.title('Confusion matrix')\n",
+        "plt.colorbar()\n",
+        "plt.ylabel('True label')\n",
+        "plt.xlabel('Predicted label')\n",
+        "plt.show()\n"
+      ],
+      "outputs": [
+        {
+          "output_type": "display_data",
+          "data": {
+            "image/png": "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\n",
+            "text/plain": "<Figure size 288x288 with 2 Axes>"
+          },
+          "metadata": {
+            "needs_background": "light"
+          }
+        }
+      ],
+      "execution_count": 68,
+      "metadata": {}
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "## Log metric and model into the AML run definition\n",
+        "### Note that training is local, we just use the run definition to log information about the run/training "
+      ],
+      "metadata": {}
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "# Log Image\n",
+        "run.log_image('Plot', plot=plt)\n",
+        "\n",
+        "# Output the Accuracy to the notebook and to the run\n",
+        "run.log('accuracy', accuracy)\n",
+        "\n",
+        "# Save the model to the outputs directory for capture\n",
+        "model_file_name = 'outputs/model.pkl'\n",
+        "joblib.dump(value = model, filename = model_file_name)\n",
+        "\n",
+        "# Complete the run\n",
+        "run.complete()"
+      ],
+      "outputs": [],
+      "execution_count": 69,
+      "metadata": {}
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "### Check the experiment run and its logged info in Azure ML Workspace\n",
+        "Now, you should go to your AML Workspace and check the information logged for this run, such as the accuracy, hyper-parameters and any other info you logged for the experiment run."
+      ],
+      "metadata": {}
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "# One Prediction\n",
+        "instance_num = 1\n",
+        "\n",
+        "# Get the prediction for the first member of the test set and explain why model made that prediction\n",
+        "prediction_value = model.predict(x_test)[instance_num]\n",
+        "print(\"One Prediction: \")\n",
+        "print(prediction_value)"
+      ],
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "One Prediction: \n",
+            "good\n"
+          ]
+        }
+      ],
+      "execution_count": 72,
+      "metadata": {}
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "predictions = pd.concat([x_test, y_test], axis=1)\n",
+        "predictions['prediction'] = y_predictions\n",
+        "predictions.head(10)"
+      ],
+      "outputs": [
+        {
+          "output_type": "execute_result",
+          "execution_count": 73,
+          "data": {
+            "text/html": "<div>\n<style scoped>\n    .dataframe tbody tr th:only-of-type {\n        vertical-align: middle;\n    }\n\n    .dataframe tbody tr th {\n        vertical-align: top;\n    }\n\n    .dataframe thead th {\n        text-align: right;\n    }\n</style>\n<table border=\"1\" class=\"dataframe\">\n  <thead>\n    <tr style=\"text-align: right;\">\n      <th></th>\n      <th>Age</th>\n      <th>Sex</th>\n      <th>Job</th>\n      <th>Housing</th>\n      <th>Saving accounts</th>\n      <th>Checking account</th>\n      <th>Credit amount</th>\n      <th>Duration</th>\n      <th>Purpose</th>\n      <th>Risk</th>\n      <th>prediction</th>\n    </tr>\n  </thead>\n  <tbody>\n    <tr>\n      <th>40</th>\n      <td>30</td>\n      <td>male</td>\n      <td>3</td>\n      <td>own</td>\n      <td>quite rich</td>\n      <td>NA</td>\n      <td>2333</td>\n      <td>30</td>\n      <td>radio/TV</td>\n      <td>good</td>\n      <td>good</td>\n    </tr>\n    <tr>\n      <th>383</th>\n      <td>26</td>\n      <td>male</td>\n      <td>2</td>\n      <td>own</td>\n      <td>little</td>\n      <td>rich</td>\n      <td>1330</td>\n      <td>12</td>\n      <td>car</td>\n      <td>good</td>\n      <td>good</td>\n    </tr>\n    <tr>\n      <th>986</th>\n      <td>33</td>\n      <td>male</td>\n      <td>2</td>\n      <td>own</td>\n      <td>little</td>\n      <td>rich</td>\n      <td>6289</td>\n      <td>42</td>\n      <td>business</td>\n      <td>good</td>\n      <td>good</td>\n    </tr>\n    <tr>\n      <th>79</th>\n      <td>22</td>\n      <td>male</td>\n      <td>2</td>\n      <td>own</td>\n      <td>little</td>\n      <td>moderate</td>\n      <td>3832</td>\n      <td>30</td>\n      <td>furniture/equipment</td>\n      <td>good</td>\n      <td>good</td>\n    </tr>\n    <tr>\n      <th>775</th>\n      <td>25</td>\n      <td>female</td>\n      <td>2</td>\n      <td>rent</td>\n      <td>NA</td>\n      <td>little</td>\n      <td>1371</td>\n      <td>24</td>\n      <td>car</td>\n      <td>bad</td>\n      <td>good</td>\n    </tr>\n    <tr>\n      <th>519</th>\n      <td>36</td>\n      <td>male</td>\n      <td>2</td>\n      <td>free</td>\n      <td>NA</td>\n      <td>NA</td>\n      <td>700</td>\n      <td>6</td>\n      <td>radio/TV</td>\n      <td>good</td>\n      <td>good</td>\n    </tr>\n    <tr>\n      <th>391</th>\n      <td>19</td>\n      <td>female</td>\n      <td>1</td>\n      <td>rent</td>\n      <td>rich</td>\n      <td>moderate</td>\n      <td>983</td>\n      <td>12</td>\n      <td>furniture/equipment</td>\n      <td>good</td>\n      <td>good</td>\n    </tr>\n    <tr>\n      <th>491</th>\n      <td>42</td>\n      <td>female</td>\n      <td>3</td>\n      <td>free</td>\n      <td>little</td>\n      <td>moderate</td>\n      <td>8318</td>\n      <td>27</td>\n      <td>business</td>\n      <td>bad</td>\n      <td>bad</td>\n    </tr>\n    <tr>\n      <th>847</th>\n      <td>28</td>\n      <td>male</td>\n      <td>2</td>\n      <td>own</td>\n      <td>little</td>\n      <td>NA</td>\n      <td>1249</td>\n      <td>24</td>\n      <td>car</td>\n      <td>good</td>\n      <td>good</td>\n    </tr>\n    <tr>\n      <th>71</th>\n      <td>46</td>\n      <td>male</td>\n      <td>1</td>\n      <td>rent</td>\n      <td>NA</td>\n      <td>NA</td>\n      <td>730</td>\n      <td>7</td>\n      <td>radio/TV</td>\n      <td>good</td>\n      <td>good</td>\n    </tr>\n  </tbody>\n</table>\n</div>",
+            "text/plain": "     Age     Sex  Job Housing Saving accounts Checking account  Credit amount  \\\n40    30    male    3     own      quite rich               NA           2333   \n383   26    male    2     own          little             rich           1330   \n986   33    male    2     own          little             rich           6289   \n79    22    male    2     own          little         moderate           3832   \n775   25  female    2    rent              NA           little           1371   \n519   36    male    2    free              NA               NA            700   \n391   19  female    1    rent            rich         moderate            983   \n491   42  female    3    free          little         moderate           8318   \n847   28    male    2     own          little               NA           1249   \n71    46    male    1    rent              NA               NA            730   \n\n     Duration              Purpose  Risk prediction  \n40         30             radio/TV  good       good  \n383        12                  car  good       good  \n986        42             business  good       good  \n79         30  furniture/equipment  good       good  \n775        24                  car   bad       good  \n519         6             radio/TV  good       good  \n391        12  furniture/equipment  good       good  \n491        27             business   bad        bad  \n847        24                  car  good       good  \n71          7             radio/TV  good       good  "
+          },
+          "metadata": {}
+        }
+      ],
+      "execution_count": 73,
+      "metadata": {}
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "## Register the model "
+      ],
+      "metadata": {}
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "from azureml.core.model import Model\n",
+        "model = Model.register(workspace = ws,    \n",
+        "                       model_path = \"./outputs/model.pkl\", # this points to a local file\n",
+        "                       model_name = \"creditmodel_local\", # this is the name the model is registered as\n",
+        "                       tags = {'area': \"German credit risk\", 'type': \"Financial Services\"},\n",
+        "                       description = \"Binary classification model to understand credit risk based on the German credit risk data\",\n",
+        "                      )"
+      ],
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "Registering model creditmodel_local\n",
+            "creditmodel_local 5\n"
+          ]
+        }
+      ],
+      "execution_count": 75,
+      "metadata": {}
+    }
+  ],
+  "metadata": {
+    "pygments_lexer": "ipython3",
+    "name": "python",
+    "mimetype": "text/x-python",
+    "npconvert_exporter": "python",
+    "kernel_info": {
+      "name": "python3"
+    },
+    "language_info": {
+      "name": "python",
+      "version": "3.6.9",
+      "mimetype": "text/x-python",
+      "codemirror_mode": {
+        "name": "ipython",
+        "version": 3
+      },
+      "pygments_lexer": "ipython3",
+      "nbconvert_exporter": "python",
+      "file_extension": ".py"
+    },
+    "version": 3,
+    "kernelspec": {
+      "name": "python3",
+      "language": "python",
+      "display_name": "Python 3"
+    },
+    "file_extension": ".py",
+    "nteract": {
+      "version": "nteract-front-end@1.0.0"
+    }
+  },
+  "nbformat": 4,
+  "nbformat_minor": 4
+}
