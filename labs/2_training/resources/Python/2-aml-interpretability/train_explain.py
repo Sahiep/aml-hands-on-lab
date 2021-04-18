@@ -8,13 +8,14 @@ from sklearn.linear_model import LogisticRegression
 from sklearn.pipeline import Pipeline
 from sklearn.preprocessing import StandardScaler,OneHotEncoder
 from sklearn_pandas import DataFrameMapper
+from interpret.ext.blackbox import TabularExplainer
+from azureml.interpret import ExplanationClient
 import os
 import pandas as pd
 os.system('pip freeze')
 
 
 from azureml.core import Run, Workspace, Experiment
-# Check core SDK version number
 import azureml.core
 print("SDK version:", azureml.core.VERSION)
 
@@ -68,9 +69,6 @@ transformations = numeric_transformations + categorical_transformations
 clf = Pipeline(steps=[('preprocessor', DataFrameMapper(transformations)),
                       ('classifier', LogisticRegression(solver='lbfgs'))])
 
-from interpret.ext.blackbox import TabularExplainer
-from azureml.contrib.interpret.explanation.explanation_client import ExplanationClient
-# create an explanation client to store the explanation (contrib API)
 client = ExplanationClient.from_run(run)
 
 # Split data into train and test
@@ -104,7 +102,7 @@ original_model = run.register_model(model_name='creditmodel_explainer_remote',
 print('create explainer')
 # create an explainer to validate or debug the model
 tabular_explainer = TabularExplainer(model,
-                                     initialization_examples=x_train,
+                                     x_train,
                                      features=creditXData.columns,
                                      classes=[0, 1],
                                      transformations=transformations)
