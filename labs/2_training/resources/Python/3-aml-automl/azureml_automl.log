@@ -1,0 +1,44 @@
+2021-04-18 19:30:58.564 - INFO - 25895 - azureml.train.automl._azureautomlclient.modify_run_configuration:199 - Package azureml-train-automl missing from dependencies file.
+2021-04-18 19:30:58.564 - INFO - 25895 - azureml.train.automl._azureautomlclient.modify_run_configuration:205 - Using pinned version: azureml-train-automl==1.19.0.*
+2021-04-18 19:30:58.565 - INFO - 25895 - azureml.train.automl._azureautomlclient.modify_run_configuration:199 - Package pandas missing from dependencies file.
+2021-04-18 19:30:58.565 - INFO - 25895 - azureml.train.automl._azureautomlclient.modify_run_configuration:205 - Using pinned version: pandas==0.25.1
+2021-04-18 19:30:58.565 - INFO - 25895 - azureml.train.automl._azureautomlclient.modify_run_configuration:199 - Package psutil missing from dependencies file.
+2021-04-18 19:30:58.566 - INFO - 25895 - azureml.train.automl._azureautomlclient.modify_run_configuration:205 - Using pinned version: psutil>5.0.0,<6.0.0
+2021-04-18 19:30:58.566 - INFO - 25895 - azureml.train.automl._azureautomlclient.modify_run_configuration:199 - Package scikit-learn missing from dependencies file.
+2021-04-18 19:30:58.567 - INFO - 25895 - azureml.train.automl._azureautomlclient.modify_run_configuration:205 - Using pinned version: scikit-learn==0.22.1
+2021-04-18 19:30:58.567 - INFO - 25895 - azureml.train.automl._azureautomlclient.modify_run_configuration:199 - Package numpy missing from dependencies file.
+2021-04-18 19:30:58.567 - INFO - 25895 - azureml.train.automl._azureautomlclient.modify_run_configuration:205 - Using pinned version: numpy~=1.18.0
+2021-04-18 19:30:58.567 - INFO - 25895 - azureml.train.automl._azureautomlclient.modify_run_configuration:199 - Package py-xgboost missing from dependencies file.
+2021-04-18 19:30:58.568 - INFO - 25895 - azureml.train.automl._azureautomlclient.modify_run_configuration:205 - Using pinned version: py-xgboost<=0.90
+2021-04-18 19:30:58.569 - INFO - 25895 - azureml.train.automl._azureautomlclient.modify_run_configuration:199 - Package inference-schema missing from dependencies file.
+2021-04-18 19:30:58.569 - INFO - 25895 - azureml.train.automl._azureautomlclient.modify_run_configuration:199 - Package fbprophet missing from dependencies file.
+2021-04-18 19:30:58.570 - INFO - 25895 - azureml.train.automl._azureautomlclient.modify_run_configuration:205 - Using pinned version: fbprophet==0.5
+2021-04-18 19:30:58.571 - INFO - 25895 - azureml.train.automl._azureautomlclient.modify_run_configuration:199 - Package setuptools-git missing from dependencies file.
+2021-04-18 19:30:58.571 - INFO - 25895 - azureml.train.automl._azureautomlclient.modify_run_configuration:209 - Using installed version: setuptools-git==1.2
+2021-04-18 19:30:58.576 - INFO - 25895 - azureml.train.automl._azureautomlclient._validate_input:663 - Start data validation.
+2021-04-18 19:30:59.472 - INFO - 25895 - azureml.train.automl._azureautomlclient._validate_input:676 - Validation service found the data has no errors.
+2021-04-18 19:30:59.472 - INFO - 25895 - azureml.train.automl._azureautomlclient._create_parent_run_for_remote:541 - Start creating parent run.
+2021-04-18 19:30:59.798 - INFO - 25895 - azureml.train.automl._azureautomlclient._create_parent_run_for_remote:561 - [ParentRunID:AutoML_098df595-23b7-4148-bebf-279fd95a12f8] Remote run using input X and y.
+2021-04-18 19:31:00.028 - INFO - 25895 - azureml.train.automl._azureautomlclient._create_parent_run_for_remote:574 - Parent Run ID: AutoML_098df595-23b7-4148-bebf-279fd95a12f8
+2021-04-18 19:31:00.029 - INFO - 25895 - azureml.train.automl._azureautomlclient._fit_remote_core:502 - Starting a snapshot run (snapshot_id : None)
+2021-04-18 19:38:08.413 - CRITICAL - 25895 - azureml.train.automl._azureautomlclient.log_traceback:224 - Type: System
+Class: SystemException
+Message: SystemException:
+	Message: Key "ProblemInfoJsonString" missing from setup run properties
+	InnerException: None
+	ErrorResponse 
+{
+    "error": {
+        "code": "System",
+        "message": "Key \"ProblemInfoJsonString\" missing from setup run properties"
+    }
+}
+Traceback:
+  File "_remote_console_interface.py", line 366, in _show_output
+    remote_printer.print_scores(current_run, primary_metric)
+  File "_remote_console_interface.py", line 95, in print_scores
+    if not self._init_console_interface(parent_run):
+  File "_remote_console_interface.py", line 73, in _init_console_interface
+    _constants_azureml.Properties.PROBLEM_INFO))
+
+ExceptionTarget: Unspecified
