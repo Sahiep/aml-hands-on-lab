@@ -43,7 +43,7 @@ See [here](https://docs.microsoft.com/en-us/azure/machine-learning/service/how-t
 
    ![createnbvm](https://github.com/ruoccofabrizio/azureml-compute-instances-shutdown/raw/master/architecture.PNG)
 
-## Set up our development environment
+## Review --- Set up our development environment
 
 ### Prerequisites
 
