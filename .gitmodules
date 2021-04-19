@@ -1,0 +1,3 @@
+[submodule "aml-lab-notebooks"]
+	path = aml-lab-notebooks
+	url = https://github.com/Sahiep/aml-lab-notebooks.git
