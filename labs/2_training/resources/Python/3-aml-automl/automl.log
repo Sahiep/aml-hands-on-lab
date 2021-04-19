@@ -1,75 +1,23 @@
-2021-04-18 20:24:33.751 - INFO - 18854 - azureml.train.automl.run._log_activity:54 - ActivityStarted: GetOutput
-2021-04-18 20:24:33.765 - INFO - 18854 - azureml.train.automl.run._log_activity:54 - ActivityStarted: GetOutput
-2021-04-18 20:24:33.778 - INFO - 18854 - azureml.train.automl.run._log_activity:54 - ActivityStarted: GetChildren
-2021-04-18 20:24:33.940 - INFO - 18854 - azureml.train.automl.run._log_activity:92 - ActivityCompleted: Activity=GetChildren, HowEnded=Success, Duration=162.69[ms]
-2021-04-18 20:24:33.941 - INFO - 18854 - azureml.train.automl.run._log_activity:92 - ActivityCompleted: Activity=GetOutput, HowEnded=Success, Duration=175.3[ms]
-2021-04-18 20:24:33.941 - INFO - 18854 - azureml.train.automl._model_download_utilities._log_activity:54 - ActivityStarted: DownloadModel
-2021-04-18 20:24:37.082 - INFO - 18854 - azureml.automl.runtime.distributed.utilities.horovod_initialized:58 - Horovod not found in current environment. Distribution via Horovod will be disabled.
-2021-04-18 20:24:39.965 - INFO - 18854 - azureml.automl.runtime.featurization.data_transformer._logger_wrapper:81 - Feature sweeping enabled: False
-2021-04-18 20:24:39.965 - INFO - 18854 - azureml.automl.runtime.featurization.data_transformer._logger_wrapper:81 - Feature sweeping timeout: 86400
-2021-04-18 20:24:40.107 - INFO - 18854 - azureml.train.automl._model_download_utilities._log_activity:92 - ActivityCompleted: Activity=DownloadModel, HowEnded=Success, Duration=6165.15[ms]
-2021-04-18 20:24:40.107 - INFO - 18854 - azureml.train.automl.run._log_activity:92 - ActivityCompleted: Activity=GetOutput, HowEnded=Success, Duration=6356.01[ms]
-2021-04-18 20:24:40.293 - INFO - 18854 - azureml.automl.runtime.featurization.data_transformer._logger_wrapper:81 - Starting to apply transforms. Total ram: 14706561024 bytes
-2021-04-18 20:24:40.294 - INFO - 18854 - azureml.automl.runtime.featurization.data_transformer._logger_wrapper:81 - Transform memory estimate: 0 bytes, Current available memory: 400957440 bytes
-2021-04-18 20:24:40.294 - INFO - 18854 - azureml.automl.runtime.featurization.data_transformer._logger_wrapper:81 - SimpleImputer: Applying transform.
-2021-04-18 20:24:40.297 - INFO - 18854 - azureml.automl.runtime.featurization.data_transformer._logger_wrapper:81 - SimpleImputer: Finished applying transform. Shape (106, 1)
-2021-04-18 20:24:40.298 - INFO - 18854 - azureml.automl.runtime.featurization.data_transformer._logger_wrapper:81 - Transform memory estimate: 0 bytes, Current available memory: 400957440 bytes
-2021-04-18 20:24:40.298 - INFO - 18854 - azureml.automl.runtime.featurization.data_transformer._logger_wrapper:81 - SimpleImputer: Applying transform.
-2021-04-18 20:24:40.301 - INFO - 18854 - azureml.automl.runtime.featurization.data_transformer._logger_wrapper:81 - SimpleImputer: Finished applying transform. Shape (106, 1)
-2021-04-18 20:24:40.302 - INFO - 18854 - azureml.automl.runtime.featurization.data_transformer._logger_wrapper:81 - Transform memory estimate: 0 bytes, Current available memory: 400957440 bytes
-2021-04-18 20:24:40.302 - INFO - 18854 - azureml.automl.runtime.featurization.data_transformer._logger_wrapper:81 - CatImputer,StringCastTransformer,LabelEncoderTransformer: Applying transform.
-2021-04-18 20:24:40.312 - INFO - 18854 - azureml.automl.runtime.featurization.data_transformer._logger_wrapper:81 - CatImputer,StringCastTransformer,LabelEncoderTransformer: Finished applying transform. Shape (106, 1)
-2021-04-18 20:24:40.312 - INFO - 18854 - azureml.automl.runtime.featurization.data_transformer._logger_wrapper:81 - Transform memory estimate: 0 bytes, Current available memory: 400957440 bytes
-2021-04-18 20:24:40.312 - INFO - 18854 - azureml.automl.runtime.featurization.data_transformer._logger_wrapper:81 - StringCastTransformer,CountVectorizer: Applying transform.
-2021-04-18 20:28:35.068 - INFO - 18854 - azureml.train.automl.run._log_activity:54 - ActivityStarted: GetOutput
-2021-04-18 20:28:35.085 - INFO - 18854 - azureml.train.automl.run._log_activity:54 - ActivityStarted: GetOutput
-2021-04-18 20:28:35.103 - INFO - 18854 - azureml.train.automl.run._log_activity:54 - ActivityStarted: GetChildren
-2021-04-18 20:28:35.526 - INFO - 18854 - azureml.train.automl.run._log_activity:92 - ActivityCompleted: Activity=GetChildren, HowEnded=Success, Duration=422.61[ms]
-2021-04-18 20:28:35.526 - INFO - 18854 - azureml.train.automl.run._log_activity:92 - ActivityCompleted: Activity=GetOutput, HowEnded=Success, Duration=441.18[ms]
-2021-04-18 20:28:35.526 - INFO - 18854 - azureml.train.automl._model_download_utilities._log_activity:54 - ActivityStarted: DownloadModel
-2021-04-18 20:28:36.710 - INFO - 18854 - azureml.automl.runtime.featurization.data_transformer._logger_wrapper:81 - Feature sweeping enabled: False
-2021-04-18 20:28:36.710 - INFO - 18854 - azureml.automl.runtime.featurization.data_transformer._logger_wrapper:81 - Feature sweeping timeout: 86400
-2021-04-18 20:28:36.751 - INFO - 18854 - azureml.train.automl._model_download_utilities._log_activity:92 - ActivityCompleted: Activity=DownloadModel, HowEnded=Success, Duration=1224.5[ms]
-2021-04-18 20:28:36.751 - INFO - 18854 - azureml.train.automl.run._log_activity:92 - ActivityCompleted: Activity=GetOutput, HowEnded=Success, Duration=1683.38[ms]
-2021-04-18 20:29:02.844 - INFO - 18854 - azureml.train.automl.run._log_activity:54 - ActivityStarted: GetOutput
-2021-04-18 20:29:02.851 - INFO - 18854 - azureml.train.automl.run._log_activity:54 - ActivityStarted: GetOutput
-2021-04-18 20:29:02.866 - INFO - 18854 - azureml.train.automl.run._log_activity:54 - ActivityStarted: GetChildren
-2021-04-18 20:29:03.257 - INFO - 18854 - azureml.train.automl.run._log_activity:92 - ActivityCompleted: Activity=GetChildren, HowEnded=Success, Duration=390.87[ms]
-2021-04-18 20:29:03.257 - INFO - 18854 - azureml.train.automl.run._log_activity:92 - ActivityCompleted: Activity=GetOutput, HowEnded=Success, Duration=406.24[ms]
-2021-04-18 20:29:03.258 - INFO - 18854 - azureml.train.automl._model_download_utilities._log_activity:54 - ActivityStarted: DownloadModel
-2021-04-18 20:29:04.485 - INFO - 18854 - azureml.automl.runtime.featurization.data_transformer._logger_wrapper:81 - Feature sweeping enabled: False
-2021-04-18 20:29:04.485 - INFO - 18854 - azureml.automl.runtime.featurization.data_transformer._logger_wrapper:81 - Feature sweeping timeout: 86400
-2021-04-18 20:29:04.540 - INFO - 18854 - azureml.train.automl._model_download_utilities._log_activity:92 - ActivityCompleted: Activity=DownloadModel, HowEnded=Success, Duration=1282.18[ms]
-2021-04-18 20:29:04.540 - INFO - 18854 - azureml.train.automl.run._log_activity:92 - ActivityCompleted: Activity=GetOutput, HowEnded=Success, Duration=1696.67[ms]
-2021-04-18 20:30:34.840 - INFO - 18854 - azureml.train.automl.run._log_activity:54 - ActivityStarted: GetOutput
-2021-04-18 20:30:34.847 - INFO - 18854 - azureml.train.automl.run._log_activity:54 - ActivityStarted: GetOutput
-2021-04-18 20:30:34.869 - INFO - 18854 - azureml.train.automl.run._log_activity:54 - ActivityStarted: GetChildren
-2021-04-18 20:30:35.024 - INFO - 18854 - azureml.train.automl.run._log_activity:92 - ActivityCompleted: Activity=GetChildren, HowEnded=Success, Duration=154.72[ms]
-2021-04-18 20:30:35.024 - INFO - 18854 - azureml.train.automl.run._log_activity:92 - ActivityCompleted: Activity=GetOutput, HowEnded=Success, Duration=177.19[ms]
-2021-04-18 20:30:35.026 - INFO - 18854 - azureml.train.automl._model_download_utilities._log_activity:54 - ActivityStarted: DownloadModel
-2021-04-18 20:30:35.744 - INFO - 18854 - azureml.automl.runtime.featurization.data_transformer._logger_wrapper:81 - Feature sweeping enabled: False
-2021-04-18 20:30:35.744 - INFO - 18854 - azureml.automl.runtime.featurization.data_transformer._logger_wrapper:81 - Feature sweeping timeout: 86400
-2021-04-18 20:30:35.790 - INFO - 18854 - azureml.train.automl._model_download_utilities._log_activity:92 - ActivityCompleted: Activity=DownloadModel, HowEnded=Success, Duration=764.49[ms]
-2021-04-18 20:30:35.790 - INFO - 18854 - azureml.train.automl.run._log_activity:92 - ActivityCompleted: Activity=GetOutput, HowEnded=Success, Duration=950.13[ms]
-2021-04-18 20:31:05.840 - INFO - 18854 - azureml.automl.runtime.featurization.data_transformer._logger_wrapper:81 - Starting to apply transforms. Total ram: 14706561024 bytes
-2021-04-18 20:31:05.842 - INFO - 18854 - azureml.automl.runtime.featurization.data_transformer._logger_wrapper:81 - Transform memory estimate: 0 bytes, Current available memory: 361971712 bytes
-2021-04-18 20:31:05.850 - INFO - 18854 - azureml.automl.runtime.featurization.data_transformer._logger_wrapper:81 - SimpleImputer: Applying transform.
-2021-04-18 20:31:05.853 - INFO - 18854 - azureml.automl.runtime.featurization.data_transformer._logger_wrapper:81 - SimpleImputer: Finished applying transform. Shape (106, 1)
-2021-04-18 20:31:05.854 - INFO - 18854 - azureml.automl.runtime.featurization.data_transformer._logger_wrapper:81 - Transform memory estimate: 0 bytes, Current available memory: 361971712 bytes
-2021-04-18 20:31:05.854 - INFO - 18854 - azureml.automl.runtime.featurization.data_transformer._logger_wrapper:81 - SimpleImputer: Applying transform.
-2021-04-18 20:31:05.857 - INFO - 18854 - azureml.automl.runtime.featurization.data_transformer._logger_wrapper:81 - SimpleImputer: Finished applying transform. Shape (106, 1)
-2021-04-18 20:31:05.858 - INFO - 18854 - azureml.automl.runtime.featurization.data_transformer._logger_wrapper:81 - Transform memory estimate: 0 bytes, Current available memory: 361971712 bytes
-2021-04-18 20:31:05.858 - INFO - 18854 - azureml.automl.runtime.featurization.data_transformer._logger_wrapper:81 - CatImputer,StringCastTransformer,LabelEncoderTransformer: Applying transform.
-2021-04-18 20:31:05.863 - INFO - 18854 - azureml.automl.runtime.featurization.data_transformer._logger_wrapper:81 - CatImputer,StringCastTransformer,LabelEncoderTransformer: Finished applying transform. Shape (106, 1)
-2021-04-18 20:31:05.864 - INFO - 18854 - azureml.automl.runtime.featurization.data_transformer._logger_wrapper:81 - Transform memory estimate: 0 bytes, Current available memory: 361971712 bytes
-2021-04-18 20:31:05.864 - INFO - 18854 - azureml.automl.runtime.featurization.data_transformer._logger_wrapper:81 - StringCastTransformer,CountVectorizer: Applying transform.
-2021-04-18 20:34:28.608 - INFO - 18854 - azureml.train.automl.run._log_activity:54 - ActivityStarted: GetOutput
-2021-04-18 20:34:28.621 - INFO - 18854 - azureml.train.automl.run._log_activity:54 - ActivityStarted: GetOutput
-2021-04-18 20:34:28.637 - INFO - 18854 - azureml.train.automl.run._log_activity:54 - ActivityStarted: GetChildren
-2021-04-18 20:34:28.801 - INFO - 18854 - azureml.train.automl.run._log_activity:92 - ActivityCompleted: Activity=GetChildren, HowEnded=Success, Duration=164.63[ms]
-2021-04-18 20:34:28.802 - INFO - 18854 - azureml.train.automl.run._log_activity:92 - ActivityCompleted: Activity=GetOutput, HowEnded=Success, Duration=180.11[ms]
-2021-04-18 20:34:28.802 - INFO - 18854 - azureml.train.automl._model_download_utilities._log_activity:54 - ActivityStarted: DownloadModel
-2021-04-18 20:34:29.427 - INFO - 18854 - azureml.automl.runtime.featurization.data_transformer._logger_wrapper:81 - Feature sweeping enabled: False
-2021-04-18 20:34:29.428 - INFO - 18854 - azureml.automl.runtime.featurization.data_transformer._logger_wrapper:81 - Feature sweeping timeout: 86400
-2021-04-18 20:34:29.480 - INFO - 18854 - azureml.train.automl._model_download_utilities._log_activity:92 - ActivityCompleted: Activity=DownloadModel, HowEnded=Success, Duration=678.62[ms]
-2021-04-18 20:34:29.481 - INFO - 18854 - azureml.train.automl.run._log_activity:92 - ActivityCompleted: Activity=GetOutput, HowEnded=Success, Duration=872.35[ms]
+2021-04-19 08:29:34.637 - INFO - 24568 - azureml.train.automl.run._log_activity:54 - ActivityStarted: GetOutput
+2021-04-19 08:29:34.655 - INFO - 24568 - azureml.train.automl.run._log_activity:54 - ActivityStarted: GetOutput
+2021-04-19 08:29:34.678 - INFO - 24568 - azureml.train.automl.run._log_activity:54 - ActivityStarted: GetChildren
+2021-04-19 08:29:34.846 - INFO - 24568 - azureml.train.automl.run._log_activity:92 - ActivityCompleted: Activity=GetChildren, HowEnded=Success, Duration=168.2[ms]
+2021-04-19 08:29:34.846 - INFO - 24568 - azureml.train.automl.run._log_activity:92 - ActivityCompleted: Activity=GetOutput, HowEnded=Success, Duration=191.4[ms]
+2021-04-19 08:29:34.847 - INFO - 24568 - azureml.train.automl._model_download_utilities._log_activity:54 - ActivityStarted: DownloadModel
+2021-04-19 08:29:37.209 - INFO - 24568 - azureml.automl.runtime.distributed.utilities.horovod_initialized:58 - Horovod not found in current environment. Distribution via Horovod will be disabled.
+2021-04-19 08:29:38.298 - INFO - 24568 - azureml.automl.runtime.featurization.data_transformer._logger_wrapper:81 - Feature sweeping enabled: False
+2021-04-19 08:29:38.298 - INFO - 24568 - azureml.automl.runtime.featurization.data_transformer._logger_wrapper:81 - Feature sweeping timeout: 86400
+2021-04-19 08:29:38.414 - INFO - 24568 - azureml.train.automl._model_download_utilities._log_activity:92 - ActivityCompleted: Activity=DownloadModel, HowEnded=Success, Duration=3566.56[ms]
+2021-04-19 08:29:38.414 - INFO - 24568 - azureml.train.automl.run._log_activity:92 - ActivityCompleted: Activity=GetOutput, HowEnded=Success, Duration=3777.45[ms]
+2021-04-19 08:29:38.639 - INFO - 24568 - azureml.automl.runtime.featurization.data_transformer._logger_wrapper:81 - Starting to apply transforms. Total ram: 14706561024 bytes
+2021-04-19 08:29:38.640 - INFO - 24568 - azureml.automl.runtime.featurization.data_transformer._logger_wrapper:81 - Transform memory estimate: 0 bytes, Current available memory: 462442496 bytes
+2021-04-19 08:29:38.640 - INFO - 24568 - azureml.automl.runtime.featurization.data_transformer._logger_wrapper:81 - SimpleImputer: Applying transform.
+2021-04-19 08:29:38.643 - INFO - 24568 - azureml.automl.runtime.featurization.data_transformer._logger_wrapper:81 - SimpleImputer: Finished applying transform. Shape (106, 1)
+2021-04-19 08:29:38.655 - INFO - 24568 - azureml.automl.runtime.featurization.data_transformer._logger_wrapper:81 - Transform memory estimate: 0 bytes, Current available memory: 462442496 bytes
+2021-04-19 08:29:38.655 - INFO - 24568 - azureml.automl.runtime.featurization.data_transformer._logger_wrapper:81 - SimpleImputer: Applying transform.
+2021-04-19 08:29:38.657 - INFO - 24568 - azureml.automl.runtime.featurization.data_transformer._logger_wrapper:81 - SimpleImputer: Finished applying transform. Shape (106, 1)
+2021-04-19 08:29:38.659 - INFO - 24568 - azureml.automl.runtime.featurization.data_transformer._logger_wrapper:81 - Transform memory estimate: 0 bytes, Current available memory: 462442496 bytes
+2021-04-19 08:29:38.659 - INFO - 24568 - azureml.automl.runtime.featurization.data_transformer._logger_wrapper:81 - CatImputer,StringCastTransformer,LabelEncoderTransformer: Applying transform.
+2021-04-19 08:29:38.668 - INFO - 24568 - azureml.automl.runtime.featurization.data_transformer._logger_wrapper:81 - CatImputer,StringCastTransformer,LabelEncoderTransformer: Finished applying transform. Shape (106, 1)
+2021-04-19 08:29:38.675 - INFO - 24568 - azureml.automl.runtime.featurization.data_transformer._logger_wrapper:81 - Transform memory estimate: 0 bytes, Current available memory: 462442496 bytes
+2021-04-19 08:29:38.676 - INFO - 24568 - azureml.automl.runtime.featurization.data_transformer._logger_wrapper:81 - StringCastTransformer,CountVectorizer: Applying transform.
