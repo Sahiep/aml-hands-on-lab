@@ -108,7 +108,7 @@ Datasets enable:
 
 - Tracking data usage: Azure ML automatically tracks which version of the dataset was used for the ML experiment and produced which model.
 
-### Option A -  Uploading a Dataset to AzureML studio
+## Option A -  Uploading a Dataset to AzureML studio
 
 1. Download the German credit dataset by clicking on this [link](https://dev.azure.com/mozamani/aml_workshop_template/_git/aml_workshop_template?path=%2FData%2Fdatasets%2Fgerman_credit_data.csv) and saving the file to your local disk
 
@@ -144,7 +144,7 @@ Datasets enable:
 
 For more information on datasets, see the how-to for more information on creating and using Datasets: https://docs.microsoft.com/en-us/azure/machine-learning/service/how-to-create-register-datasets
 
-### Option B -  Create a Dataset via AzureML SDK
+## Option B -  Create a Dataset via AzureML SDK
 
 You can also create a Dataset using Python via the AzureML SDK. For more details see [here](https://docs.microsoft.com/en-us/azure/machine-learning/how-to-create-register-datasets). 
 
