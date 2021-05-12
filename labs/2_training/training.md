@@ -90,9 +90,9 @@ To learn more about automated ML, see documentation [here](https://docs.microsof
 
 - Try the sample notebooks [here](https://github.com/Azure/MachineLearningNotebooks/tree/master/how-to-use-azureml/automated-machine-learning).
 
-# Training ML models using the SDK
+## Review --- Training ML models using the SDK
 
-## Objectives
+### Review --- Objectives
 
 In the following exercise you will learn to submit training runs using the Azure Machine Learning SDK:
 - Train locally on the notebook
@@ -100,19 +100,19 @@ In the following exercise you will learn to submit training runs using the Azure
 - User Hyperparameter Tuning to optimize your model
 - Use AutoML in the AML SDK
 
-### Prerequisits
-
-To run through below instructions, you need an Azure subscription, an AzureML workspace, a registered data set (i.e. **german-credit**) and an AzureML compute target (i.e. **cpu-cluster**). See instructions on how to create a workspace [here](../0_setup/setup.md), register an AzureML dataset and create an AzureML compute target [here](../1_concepts/concepts.md).
-
-## Train a model using the AzureML SDK
-
 In this module we train a machine learning model using the AzureML SDK. We will work with the follwing Jupyter Notebooks:
 
 1. Training on local compute: [Python SDK - local_train_binary_classifier.ipynb ](https://github.com/Sahiep/aml-lab-notebooks/blob/main/labs/2_training/Python/1-aml-training-and-hyperdrive/local_train_binary_classifier.ipynb) 
 
 2. Training on a remote compute:  [Python SDK - train_remote_binaryclassification.ipynb](https://github.com/Sahiep/aml-lab-notebooks/blob/main/labs/2_training/Python/1-aml-training-and-hyperdrive/train_remote_binaryclassification.ipynb)  / [R SDK](https://github.com/Sahiep/aml-lab-notebooks/tree/main/labs/2_training/R)
 
+!!!!!!!!!!Add the other notebooks
+
 For more details and examples on model training using SDK & hyper-parameter optimization see [here](https://docs.microsoft.com/en-us/azure/machine-learning/tutorial-train-models-with-aml?view=azure-ml-py) and [here](https://docs.microsoft.com/en-us/azure/machine-learning/how-to-tune-hyperparameters?view=azure-ml-py).
+
+### Prerequisits
+
+To run through below instructions, you need an Azure subscription, an AzureML workspace, a registered data set (i.e. **german-credit**) and an AzureML compute target (i.e. **cpu-cluster**). See instructions on how to create a workspace [here](../0_setup/setup.md), register an AzureML dataset and create an AzureML compute target [here](../1_concepts/concepts.md).
 
 ### Clone the Git repository to your Compute Instance
 For the following parts of the workshop, you are going to work on the notebook environment hosted on the Compute instance you just created. First, you need to clone this git repository onto the workspace.
