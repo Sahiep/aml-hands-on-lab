@@ -7,7 +7,7 @@ layout: home
 ## Labs
 
 1. [Azure ML Setup](./labs/0_setup/setup.md) 
-1. [Azure ML Concepts](./labs/1_concepts/concepts.md)
+1. [Azure ML Compute Targets and Data Stores](./labs/1_concepts/concepts.md)
 1. [Azure ML Model Training](./labs/2_training/training.md)
 1. [Azure ML Deployment](./labs/3_deployment/deployment.md)
 
