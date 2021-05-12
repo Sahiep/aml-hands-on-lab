@@ -89,11 +89,11 @@ You can either use the:
    $ git clone https://github.com/Sahiep/aml-lab-notebooks.git
    ```
 
-## Review --- AzureML Datasets
+## AzureML Datasets
 
 ### Prerequisites
 
-To run through below instructions, you need an Azure subscription and an AzureML workspace. See instructions on how to create a workspace [here](../../../0-Setup/README.md) and more details [here](https://docs.microsoft.com/en-us/azure/machine-learning/how-to-create-register-datasets) and [here](https://docs.microsoft.com/en-us/azure/machine-learning/how-to-access-data).
+To run through below instructions, you need an Azure subscription and an AzureML workspace. See instructions on how to create a workspace [here](../0-Setup/README.md) and more details [here](https://docs.microsoft.com/en-us/azure/machine-learning/how-to-create-register-datasets) and [here](https://docs.microsoft.com/en-us/azure/machine-learning/how-to-access-data).
 
 ### Create an AML Dataset
 
@@ -120,7 +120,7 @@ Datasets enable:
 
     ![](./media/from_local_files.png)
 
-3. Click 'Browse', choose the file you had downloaded, and click 'Next' to create the dataset in the workspace's default Blob storage
+3. Click 'Upload', choose the file you had downloaded, and click 'Next' to create the dataset in the workspace's default Blob storage
 
    ![](./media/upload.png)
 
@@ -131,31 +131,6 @@ Datasets enable:
    ![](./media/schema.png)
 
 5. Finally, in the "Confirm Details" section, select "Profile this dataset after creation" and specify the 'cpu-cluster' that you previously created as the compute to use for profiling and click 'Create'
-
-### Option B - Create a Dataset from web file
-
-1. Here we are using German credit dataset and create a reference to the webfile:
-   https://dev.azure.com/mozamani/aml_workshop_template/_git/aml_workshop_template?path=%2FData%2Fdatasets%2Fgerman_credit_data.csv
-
-2. Navigate to the left pane of your workspace. Select Datasets under the Assets section
-
-   ![](./media/datasets.png)
-
-   Click on 'Create dataset' and choose 'From web files'. Copy/Paste the above URL in the Web URL box, name the dataset '**german_credit**' and then click 'Next'. Make sure to leave the dataset type as Tabular.
-
-   ![](./media/from_web_files.png)
-
-3. From 'Column headers' drop-down select 'Use headers from the first file'
-
-   ![](./media/headers.png)
-
-4. Click 'Next' through the following "Settings and preview" and "Schema" sections to verify that everything looks correct
-
-    ![](./media/schemas.png)
-
-5. Finally, in the "Confirm Details" section, select "Profile this dataset after creation" and specify the 'cpu-cluster' that you previously created as the compute to use for profiling and click 'Create'
-
-    ![](./media/confirm.png)
 
 ### Explore the dataset
 
