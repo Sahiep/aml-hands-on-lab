@@ -160,23 +160,22 @@ You submit your training experiment with a ScriptRunConfig object. This object i
 * environment: The environment to use when running the script
 * and some additional configurable options (see the reference documentation for more information)
 
-## Review --- Exercise: Train ML model locally
+## Exercise: Train ML model locally 
+### using the Jupyter Notebook local_train_binary_classifier.ipynb
 
 In the following exercise you will:
-- Create an experiment to run
-- Create an environment where the script will run
-- Create a ScriptRunConfig, which specifies the compute target and environment
-- Submit the run
+- Upload datasets to AML datastore and register a dataset
+- Create an experiment "local-train-german-credit" to run
+- Submit and log the training run
 - Wait for the run to complete
-- Register the newly trained model
+- Register the newly trained model 
 
-### Review --- Execute the Jupyter Notebook 1-scikit-learn-local-train-on-notebook.....
-
-1. Run the setup notebook to train locally [Python SDK](/sdk/local-compute/setup.ipynb) 
+1. Run the notebook to train locally [Python SDK - local_train_binary_classifier.ipynb](https://github.com/Sahiep/aml-lab-notebooks/blob/main/labs/2_training/Python/1-aml-training-and-hyperdrive/local_train_binary_classifier.ipynb) 
 1. Check for your experiment run in the Azure ML Workspace
 1. Check your newly registered ML model
 
-## Review --- Exercise: Train ML model remotely + Hyperdrive
+## Exercise: Train ML model remotely + Hyperdrive 
+### using the Jupyter notebook train_remote_binaryclassification.ipynb
 
 In the following exercise you will:
 - Create an experiment to run
@@ -187,9 +186,7 @@ In the following exercise you will:
 - Register the newly trained model
 - *Optional*: Run Hyperdrive to optimize your model
 
-### Review --- Execute the Jupyter Notebook 2-scikit-learn-remote-training.....
-
-1. Run the setup notebook to train remotely ---> LINK [Python SDK](/sdk/local-compute/setup.ipynb) 
+1. Run the notebook to train remotely [Python SDK - train_remote_binaryclassification.ipynb](https://github.com/Sahiep/aml-lab-notebooks/blob/main/labs/2_training/Python/1-aml-training-and-hyperdrive/train_remote_binaryclassification.ipynb) 
 1. Check for your experiment run in the Azure ML Workspace
 1. Check for your hyperdrive run in the Azure ML Workspace
 1. Check your newly registered ML model
