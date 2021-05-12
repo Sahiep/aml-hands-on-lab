@@ -165,7 +165,7 @@ print(ws.name, ws.resource_group, ws.location, sep='\n')
 ```
 
 ```python
-#Run the following code to determine the datastores in your workspace:
+#Run the following code to determine the datastores in your workspace and upload the files in the folder datasets:
 
 # Get the default datastore
 default_ds = ws.get_default_datastore()
