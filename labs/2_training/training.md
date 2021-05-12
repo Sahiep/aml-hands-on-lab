@@ -161,7 +161,6 @@ You submit your training experiment with a ScriptRunConfig object. This object i
 * and some additional configurable options (see the reference documentation for more information)
 
 ## Exercise: Train ML model locally 
-### using the Jupyter Notebook local_train_binary_classifier.ipynb
 
 In the following exercise you will:
 - Upload datasets to AML datastore and register a dataset
@@ -175,7 +174,6 @@ In the following exercise you will:
 1. Check your newly registered ML model
 
 ## Exercise: Train ML model remotely + Hyperdrive 
-### using the Jupyter notebook train_remote_binaryclassification.ipynb
 
 In the following exercise you will:
 - Create an experiment to run
@@ -191,37 +189,21 @@ In the following exercise you will:
 1. Check for your hyperdrive run in the Azure ML Workspace
 1. Check your newly registered ML model
 
-## Review -- Train AutoML using the SDK (locally or remote)
-
-### Train an Auto ML model locally
-
-### Train an Auto ML model on a remote compute
-
- - Run the notebook for AutoML remote compute:  [Python SDK](../SDK/remote-compute/binayclassification-german-credit-autoaml-remote-amlcompute.ipynb)
-
-See also [here](https://docs.microsoft.com/en-us/azure/machine-learning/tutorial-auto-train-models?view=azure-ml-py), for another example of trainig a model using Azure Automated ML.
-
-## The Automated Machine Learning (SDK)
-
-### Prerequisites
-
-To run through below instructions, you need an Azure subscription, an AzureML workspace, a registered data set (i.e. **german-credit**) and an AzureML compute target (i.e. **cpu-cluster**). See instructions on how to create a workspace [here](../../../0_setup/setup.md), register an AzureML dataset and create an AzureML compute target [here](../../../1_concepts/concepts.md).
-
-### Train a model with Azure Automated ML
+## Exercise: Automated Machine Learning (SDK)
 
 In this tutorial, you use automated machine learning in Azure Machine Learning to create a classification model to predict credit risk for German credit dataset. This process accepts training data and configuration settings, and automatically iterates through combinations of different feature normalization/standardization methods, models, and hyperparameter settings to arrive at the best model.
 
 ![automlflow](./media/flow2.png)
 
-Here we are considering two main scenarios:
+In the following exercise you will:
+- Create an experiment to run
+- Create an AutoMLConfig, which specifies the compute target and environment
+- Submit the run
+- Wait for the run to complete
+- Test the best model
 
-### Train an Auto ML model on local compute
-
-1. Run the setup notebook to install automl and onnx-runtime [Python SDK](../SDK/local-compute/setup.ipynb) 
-2. Train a model using Automated ML on local compute:  [Python SDK](../SDK/local-compute/binayclassification-german-credit-autoaml-local-compute.ipynb)
-
-### Train an Auto ML model on a remote compute
-
- - Run the notebook for AutoML remote compute:  [Python SDK](../SDK/remote-compute/binayclassification-german-credit-autoaml-remote-amlcompute.ipynb)
+1. Run the notebook to train with automl [Python SDK - remote-autoaml-binayclassification.ipynb](https://github.com/Sahiep/aml-lab-notebooks/blob/main/labs/2_training/Python/3-aml-automl/remote-autoaml-binayclassification.ipynb) 
+1. Check for your experiment run in the Azure ML Workspace
+1. Test your best fitted model
 
 See also [here](https://docs.microsoft.com/en-us/azure/machine-learning/tutorial-auto-train-models?view=azure-ml-py), for another example of trainig a model using Azure Automated ML.
