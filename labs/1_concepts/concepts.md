@@ -144,5 +144,54 @@ Datasets enable:
 
 For more information on datasets, see the how-to for more information on creating and using Datasets: https://docs.microsoft.com/en-us/azure/machine-learning/service/how-to-create-register-datasets
 
-## Review --- Option C - Create a Dataset in the SDK
+### Create a Dataset via AzureML SDK
+
+You can also create a Dataset using Python via the AzureML SDK. For more details see [here](https://docs.microsoft.com/en-us/azure/machine-learning/how-to-create-register-datasets). 
+
+To run through below instructions, you need an Azure subscription, AzureML workspace, Compute Instance and the cloned git repository as described above.
+
+1. Open the Notebook in the folder aml-lab-notebooks/labs/2_training/1-aml-training-hyperdrive.ipynb an review the first cells on how to connect to your Workspace and Upload Data to a Datastore and register a Dataset. 
+
+```python
+
+from azureml.core import Workspace, Datastore, Dataset
+
+# Connect to an existing Azure ML Workshop in order to use Azure ML Datasets and Runs Logging into AML
+# if you run this locally download config.json and place it in root folder of the repo
+# ws = Workspace.from_config('../../../config.json') 
+ws = Workspace.from_config()
+print(ws.name, ws.resource_group, ws.location, sep='\n')
+
+```
+
+```python
+#Run the following code to determine the datastores in your workspace:
+
+# Get the default datastore
+default_ds = ws.get_default_datastore()
+
+# Enumerate all datastores, indicating which is the default
+for ds_name in ws.datastores:
+    print(ds_name, "- Default =", ds_name == default_ds.name)
+
+default_ds.upload(src_dir='../../../../Data/datasets',
+                 target_path='datasets',
+                 overwrite=True)
+```
+
+```python
+from azureml.core import Dataset
+
+# Create a tabular dataset from the path on the datastore (this may take a short while)
+dataset = Dataset.Tabular.from_delimited_files(path = [(default_ds, './datasets/german_credit_data.csv')])
+
+# preview the first 3 rows of the dataset
+dataset.take(3).to_pandas_dataframe()
+
+creditData = dataset.register(workspace = ws,
+                                name = 'german-credit',
+                                description = 'german credit data',
+                                create_new_version = True)
+```
+
 
