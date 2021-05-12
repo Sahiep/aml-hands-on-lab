@@ -144,7 +144,7 @@ Datasets enable:
 
 For more information on datasets, see the how-to for more information on creating and using Datasets: https://docs.microsoft.com/en-us/azure/machine-learning/service/how-to-create-register-datasets
 
-### Create a Dataset via AzureML SDK
+### Option B -  Create a Dataset via AzureML SDK
 
 You can also create a Dataset using Python via the AzureML SDK. For more details see [here](https://docs.microsoft.com/en-us/azure/machine-learning/how-to-create-register-datasets). 
 
