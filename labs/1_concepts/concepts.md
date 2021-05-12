@@ -43,7 +43,7 @@ See [here](https://docs.microsoft.com/en-us/azure/machine-learning/service/how-t
 
    ![createnbvm](https://github.com/ruoccofabrizio/azureml-compute-instances-shutdown/raw/master/architecture.PNG)
 
-## Review --- Set up our development environment
+## Set up our development environment
 
 ### Prerequisites
 
@@ -67,7 +67,7 @@ You can either use the:
 
      ![](./media/terminal_1.png)
 
-     ![](./media/terminal_2.png)
+     ![](./media/terminal_4.png)
 
 3. In the terminal window clone this repository by typing:
    ```
