@@ -150,7 +150,7 @@ You can also create a Dataset using Python via the AzureML SDK. For more details
 
 To run through below instructions, you need an Azure subscription, AzureML workspace, Compute Instance and the cloned git repository as described above.
 
-1. Open the Notebook in the folder aml-lab-notebooks/labs/2_training/1-aml-training-hyperdrive.ipynb an review the first cells on how to connect to your Workspace and Upload Data to a Datastore and register a Dataset. 
+1. Open the Notebook in the folder aml-lab-notebooks/labs/2_training/Python/1-aml-training-hyperdrive.ipynb an review the first cells on how to connect to your Workspace and Upload Data to a Datastore and register a Dataset. 
 
 ```python
 
