@@ -11,7 +11,7 @@ In the following Excercise you will learn:
 
 ### Prerequisites
 
-To run through below instructions, you need an Azure subscription, an AzureML workspace and an AzureML compute target (i.e. **cpu-cluster**). See instructions on how to create a workspace [here](../../../0_setup/setup.md) and create an AzureML compute target [here](../../../1_concepts/concepts.md).
+To run through below instructions, you need an Azure subscription, an AzureML workspace and an AzureML compute target (i.e. **cpu-cluster**). See instructions on how to create a workspace [here](../0_setup/setup.md) and create an AzureML compute target [here](../1_concepts/concepts.md).
 
 ### Create an AzureML experiment using Designer
 
@@ -49,7 +49,7 @@ To run through below instructions, you need an Azure subscription, an AzureML wo
 
 ### Prerequisites
 
-To run through below instructions, you need an Azure subscription, an AzureML workspace, a registered data set (i.e. **german-credit**) and an AzureML compute target (i.e. **cpu-cluster**). See instructions on how to create a workspace [here](../../../0_setup/setup.md), register an AzureML dataset and create an AzureML compute target [here](../../../1_concepts/concepts.md).
+To run through below instructions, you need an Azure subscription, an AzureML workspace, a registered data set (i.e. **german-credit**) and an AzureML compute target (i.e. **cpu-cluster**). See instructions on how to create a workspace [here](../0_setup/setup.md), register an AzureML dataset and create an AzureML compute target [here](../1_concepts/concepts.md).
 
 ### Create your first automated ML experiment
 
@@ -94,32 +94,32 @@ To learn more about automated ML, see documentation [here](https://docs.microsof
 
 ## Objectives
 
-In the following exercise you will learn to submit training runs using the SDK:
+In the following exercise you will learn to submit training runs using the Azure Machine Learning SDK:
 - Train locally on the notebook
 - Train remotely on the compute cluster
 - User Hyperparameter Tuning to optimize your model
-- Use AutoML in the SDK
+- Use AutoML in the AML SDK
 
-## Review -- LINKs Prerequisits
+### Prerequisits
 
-To run through below instructions, you need an Azure subscription, an AzureML workspace, a registered data set (i.e. **german-credit**) and an AzureML compute target (i.e. **cpu-cluster**). See instructions on how to create a workspace [here](../../../0-Setup/README.md), register an AzureML dataset [here](../../1-Concepts/2-Datastores-datasets/UI/README.md) and create an AzureML compute target [here](../../1-Concepts/0-Compute/UI/README.md).
+To run through below instructions, you need an Azure subscription, an AzureML workspace, a registered data set (i.e. **german-credit**) and an AzureML compute target (i.e. **cpu-cluster**). See instructions on how to create a workspace [here](../0_setup/setup.md), register an AzureML dataset and create an AzureML compute target [here](../1_concepts/concepts.md).
 
-## Review --- LINKS Train a model using the AzureML SDK
+## Train a model using the AzureML SDK
 
-In this module we train a machine learning model using the AzureML SDK.
+In this module we train a machine learning model using the AzureML SDK. We will work with the follwing Jupyter Notebooks:
 
-1. Training on local compute: [Python SDK](./Python/1-aml-training-and-hyperdrive/1-scikit-learn-local-training-on-notebook-plus-aml-ds-and-log/binayclassification-german-credit-notebook.ipynb) 
+1. Training on local compute: [Python SDK - local_train_binary_classifier.ipynb ](https://github.com/Sahiep/aml-lab-notebooks/blob/main/labs/2_training/Python/1-aml-training-and-hyperdrive/local_train_binary_classifier.ipynb) 
 
-2. Training on a remote compute:  [Python SDK](./Python/1-aml-training-and-hyperdrive/2-scikit-learn-remote-training-on-aml-compute-plus-hyperdrive/binayclassification-german-credit-aml-compute-notebook.ipynb)  / [R SDK](./R/README.md)
-
-3. Hyper-parameter optimization:  [Python SDK](./Python/1-aml-training-and-hyperdrive/2-scikit-learn-remote-training-on-aml-compute-plus-hyperdrive/binayclassification-german-credit-aml-compute-notebook.ipynb)
+2. Training on a remote compute:  [Python SDK - train_remote_binaryclassification.ipynb](https://github.com/Sahiep/aml-lab-notebooks/blob/main/labs/2_training/Python/1-aml-training-and-hyperdrive/train_remote_binaryclassification.ipynb)  / [R SDK](https://github.com/Sahiep/aml-lab-notebooks/tree/main/labs/2_training/R)
 
 For more details and examples on model training using SDK & hyper-parameter optimization see [here](https://docs.microsoft.com/en-us/azure/machine-learning/tutorial-train-models-with-aml?view=azure-ml-py) and [here](https://docs.microsoft.com/en-us/azure/machine-learning/how-to-tune-hyperparameters?view=azure-ml-py).
 
-### Review --- Clone the Git repository to your Compute Instance
+### Clone the Git repository to your Compute Instance
 For the following parts of the workshop, you are going to work on the notebook environment hosted on the Compute instance you just created. First, you need to clone this git repository onto the workspace.
 
-1. To get started, first navigate to the Jupyter(Lab) instance running on the Compute instance by clicking on the Jupyter(Lab) link shown:
+##### Option 1 Using Jupyter(Lab)
+
+1.1. To get started, first navigate to the Jupyter(Lab) instance running on the Compute instance by clicking on the Jupyter(Lab) link shown:
 
    ![](./media/computes_view.png)
 
@@ -127,11 +127,26 @@ For the following parts of the workshop, you are going to work on the notebook e
 
      ![](./media/terminal_1.png)
 
-     ![](./media/terminal_2.png)
+     ![](./media/terminal_4.png)
 
 3. In the terminal window clone this repository by typing:
    ```
-   $ git clone https://github.com/Sahiep/aml-hands-on-lab.git
+   $ git clone https://github.com/Sahiep/aml-lab-notebooks.git
+   ```
+
+##### Option 2 Using AML Notebook Experience
+
+1. To get started, first navigate to the Notebooks area in the AzureML Studio:
+
+   ![](./media/notebooks.png)
+
+2. Open a new Terminal. Make sure your Compute Instances is selected and in the State "Running". 
+
+     ![](./media/terminal_3.png)
+
+3. In the terminal window clone this repository by typing:
+   ```
+   $ git clone https://github.com/Sahiep/aml-lab-notebooks.git
    ```
 
 ## What's a script run configuration?
