@@ -49,9 +49,15 @@ See [here](https://docs.microsoft.com/en-us/azure/machine-learning/service/how-t
 
 To run through below instructions, you need an Azure subscription and an AzureML workspace. See instructions on how to create a workspace [here](../0_setup/setup.md) and more details [here](https://docs.microsoft.com/en-us/azure/machine-learning/concept-compute-instance).
 
-### Clone the Git repository ml-ws to the workspace storage
+### Clone the Git repository aml-lab-notebooks to the AML Workspace 
 
 For the following parts of the workshop, you are going to work on the notebook environment hosted on the Compute instance you just created. First, you need to clone this git repository onto the workspace.
+
+You can either use the: 
+1. Jupyter(Lab) environment or
+1. AML Workspace Notebook Experience
+
+##### Option 1 Using Jupyter(Lab)
 
 1. To get started, first navigate to the Jupyter(Lab) instance running on the Compute instance by clicking on the Jupyter(Lab) link shown:
 
@@ -65,7 +71,22 @@ For the following parts of the workshop, you are going to work on the notebook e
 
 3. In the terminal window clone this repository by typing:
    ```
-   $ git clone https://github.com/Sahiep/aml-hands-on-lab.git
+   $ git clone https://github.com/Sahiep/aml-lab-notebooks.git
+   ```
+
+##### Option 2 Using AML Notebook Experience
+
+1. To get started, first navigate to the Notebooks area in the AzureML Studio:
+
+   ![](./media/notebooks.png)
+
+2. Open a new Terminal. Make sure your Compute Instances is selected and in the State "Running". 
+
+     ![](./media/terminal_3.png)
+
+3. In the terminal window clone this repository by typing:
+   ```
+   $ git clone https://github.com/Sahiep/aml-lab-notebooks.git
    ```
 
 ## Review --- AzureML Datasets
