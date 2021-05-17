@@ -90,9 +90,9 @@ To learn more about automated ML, see documentation [here](https://docs.microsof
 
 - Try the sample notebooks [here](https://github.com/Azure/MachineLearningNotebooks/tree/master/how-to-use-azureml/automated-machine-learning).
 
-## Review --- Training ML models using the SDK
+## Training ML models using the SDK
 
-### Review --- Objectives
+### Objectives
 
 In the following exercise you will learn to submit training runs using the Azure Machine Learning SDK:
 - Train locally on the notebook
@@ -106,7 +106,9 @@ In this module we train a machine learning model using the AzureML SDK. We will 
 
 2. Training on a remote compute:  [Python SDK - train_remote_binaryclassification.ipynb](https://github.com/Sahiep/aml-lab-notebooks/blob/main/labs/2_training/Python/1-aml-training-and-hyperdrive/train_remote_binaryclassification.ipynb)  / [R SDK](https://github.com/Sahiep/aml-lab-notebooks/tree/main/labs/2_training/R)
 
-!!!!!!!!!!Add the other notebooks
+3. Interpret your model using InterpretML:  [Python SDK - explain-model-on-amlcompute.ipynb](https://github.com/Sahiep/aml-lab-notebooks/blob/main/labs/2_training\Python\2-aml-interpret\explain-model-on-amlcompute.ipynb)
+
+4. Training AutoML using the SDK: [Python SDK - explain-model-on-amlcompute.ipynb](https://github.com/Sahiep/aml-lab-notebooks/blob/main/labs/2_training\Python\3-aml-automl\remote-autoaml-binayclassification.ipynb)
 
 For more details and examples on model training using SDK & hyper-parameter optimization see [here](https://docs.microsoft.com/en-us/azure/machine-learning/tutorial-train-models-with-aml?view=azure-ml-py) and [here](https://docs.microsoft.com/en-us/azure/machine-learning/how-to-tune-hyperparameters?view=azure-ml-py).
 
@@ -188,6 +190,21 @@ In the following exercise you will:
 1. Check for your experiment run in the Azure ML Workspace
 1. Check for your hyperdrive run in the Azure ML Workspace
 1. Check your newly registered ML model
+
+## Exercise: InterpretML (SDK)
+
+In the following exercise you will:
+- Create an experiment to run
+- Create an ScriptRunConfig, which specifies the compute target and environment
+- Submit the run
+- Load model explanation
+- View InterpretML results
+
+1. Run the notebook interpret your model using InterpretML:  [Python SDK - explain-model-on-amlcompute.ipynb](https://github.com/Sahiep/aml-lab-notebooks/blob/main/labs/2_training\Python\2-aml-interpret\explain-model-on-amlcompute.ipynb)
+1. Review the Notebook results
+1. Check for your experiment run in the Azure ML Workspace
+
+See also [here](https://docs.microsoft.com/en-us/azure/machine-learning/how-to-machine-learning-interpretability-aml), for more details on model interpretation using InterpretML and [here](https://github.com/Azure/MachineLearningNotebooks/tree/master/how-to-use-azureml/explain-model) for more examples.
 
 ## Exercise: Automated Machine Learning (SDK)
 
