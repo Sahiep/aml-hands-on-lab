@@ -12,10 +12,10 @@ To run through below instructions, you need an Azure subscription, an AzureML wo
 ## Exercise: Deploy your model on Azure Container Instance
 
 In the following exercise you will:
-1. Register the model or load the registered model
-2. Prepare to deploy. (Specify assets, usage, compute target.)
-3. Deploy the model to the compute target.
-4. Test the deployed model, also called a web service.
+- Register the model or load the registered model
+- Prepare to deploy. (Specify assets, usage, compute target.)
+- Deploy the model to the compute target.
+- Test the deployed model, also called a web service.
 
 1. Run the notebook to deploy to ACI [Python SDK - deploy-credit-model.ipynb](https://github.com/Sahiep/aml-lab-notebooks/blob/main/labs/3_deployment/deploy-credit-model.ipynb) 
 1. Check for your Endpoint in the Azure ML Workspace
