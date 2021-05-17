@@ -7,5 +7,3 @@ Head over to the [Github Pages](https://sahiep.github.io/aml-hands-on-lab/) to s
 ## Acknowledgemnts
 
 Thanks a ton to Mohammad Zamaninasab for the awesome Lab blueprint and [Oliver Lohmann](https://github.com/ohlohmann) for the GitHub Pages template!
-"# test" 
-"# aml-hands-on-lab" 
